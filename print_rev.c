@@ -6,7 +6,7 @@
 *@r: string to print
 *Return: number of chars printed
 */
-int print_rev(va_list r)
+int print_rev(va_list l, flags_t *f);
 {
 	char *st;
 	int i, j = 0;
