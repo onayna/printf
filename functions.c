@@ -91,7 +91,7 @@ int print_string(va_list args, char buffer[],
 int print_percent(va_list args, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	UNUSED(types);
+	UNUSED(args);
 	UNUSED(buffer);
 	UNUSED(flags);
 	UNUSED(width);
@@ -174,7 +174,7 @@ int print_binary(va_list args, char buffer[],
 	num = va_arg(args, unsigned int);
 	binary = 2147483648; /* (2 ^ 31) */
 	a[0] = num / binary;
-	for (integer = 1; iinteger < 32; integer++)
+	for (integer = 1; integer < 32; integer++)
 	{
 		binary /= 2;
 		a[integer] = (num / binary) % 2;

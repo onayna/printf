@@ -72,11 +72,11 @@ int write_number(int is_negative, int index, char buffer[],
 	if (is_negative)
 		extra_char = '-';
 	else if (flags & F_PLUS)
-		extra_ch = '+';
+		extra_char = '+';
 	else if (flags & F_SPACE)
 		extra_char = ' ';
 
-	return (write_num(ind, buffer, flags, width, precision,
+	return (write_num(index, buffer, flags, width, precision,
 		length, padd, extra_char));
 }
 
@@ -104,7 +104,7 @@ int write_num(int index, char buffer[],
 		return (0);
 	if (precision == 0 && index == BUFF_SIZE - 2 && buffer[index] == '0')
 		buffer[index] = padd = ' ';
-	if (precision > 0 && prec < length)
+	if (precision > 0 && precision < length)
 		padd = ' ';
 	while (precision > length)
 		buffer[--index] = '0', length++;
@@ -114,7 +114,7 @@ int write_num(int index, char buffer[],
 	{
 		for (k = 1; k < width - length + 1; k++)
 			buffer[k] = padd;
-		buffer[i] = '\0';
+		buffer[k] = '\0';
 		/* Assigning an extra character to the left side of the buffer */
 		if (flags & F_MINUS && padd == ' ')
 		{
@@ -158,7 +158,7 @@ int write_unsigned(int is_negative, int index,
 	char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int length = BUFF_SIZE - ind - 1, x = 0;
+	int length = BUFF_SIZE - index - 1, x = 0;
 	char padd = ' ';
 
 	UNUSED(is_negative);
@@ -188,7 +188,7 @@ int write_unsigned(int is_negative, int index,
 
 		if (flags & F_MINUS)
 		{
-			return (write(1, &buffer[index], length) + write(1, &buffer[0], i));
+			return (write(1, &buffer[index], length) + write(1, &buffer[0], x));
 		}
 		else
 		{
@@ -220,7 +220,7 @@ int write_pointer(char buffer[], int index, int length,
 	if (width > length)
 	{
 		for (y = 3; y < width - length + 3; y++)
-			buffer[x] = padd;
+			buffer[y] = padd;
 		buffer[y] = '\0';
 		if (flags & F_MINUS && padd == ' ')
 		{
@@ -252,5 +252,5 @@ int write_pointer(char buffer[], int index, int length,
 	buffer[--index] = '0';
 	if (extra_c)
 		buffer[--index] = extra_c;
-	return (write(1, &buffer[index], BUFF_SIZE - ind - 1));
+	return (write(1, &buffer[index], BUFF_SIZE - index - 1));
 }

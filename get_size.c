@@ -9,7 +9,7 @@
  */
 int get_size(const char *format, int *x)
 {
-	int current = *i + 1;
+	int current = *x + 1;
 	int size = 0;
 
 	if (format[current] == 'l')
@@ -20,7 +20,7 @@ int get_size(const char *format, int *x)
 	if (size == 0)
 		*x = current - 1;
 	else
-		*x = currenti;
+		*x = current;
 
 	return (size);
 }
